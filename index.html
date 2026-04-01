@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rural Tourism</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Leaf Falling Animation */
+    .leaf {
+      position: absolute;
+      top: -50px;
+      font-size: 20px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Smooth text fade */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1.2s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-black">
+
+  <!-- Hero Section -->
+  <div class="relative h-screen w-full overflow-hidden">
+
+    <!-- 🌿 Falling Leaves -->
+    <div class="leaf left-[10%]" style="animation-duration: 8s;">🍃</div>
+    <div class="leaf left-[30%]" style="animation-duration: 10s;">🍂</div>
+    <div class="leaf left-[60%]" style="animation-duration: 7s;">🍃</div>
+    <div class="leaf left-[80%]" style="animation-duration: 9s;">🍂</div>
+
+    <!-- Navbar -->
+    <nav class="absolute top-0 left-0 w-full z-20 px-6 md:px-12 py-4 flex items-center justify-between">
+
+      <div class="text-white text-xl md:text-2xl font-semibold">
+        ಕರ್ನಾಟಕ <span class="font-light">Rural</span>
+      </div>
+
+      <div class="flex items-center space-x-6 text-white">
+        <a href="#" class="hover:text-green-300 transition">Explore</a>
+        <a href="#" class="hover:text-gray-300 transition">About</a>
+        <button class="px-5 py-2 border border-white rounded-full hover:bg-white hover:text-black transition">
+          Get Started
+        </button>
+      </div>
+
+    </nav>
+
+    <!-- Video -->
+    <video 
+      autoplay 
+      muted 
+      loop 
+      playsinline
+      class="absolute w-full h-full object-cover"
+    >
+      <source src="myved.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay -->
+    <div id="overlay" class="absolute inset-0 bg-black/50 transition-all duration-300"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
+
+      <h1 class="text-4xl md:text-6xl font-bold fade-up">
+        Explore Rural Karnataka
+      </h1>
+
+      <p class="mt-4 text-lg md:text-2xl fade-up">
+        ಮಣ್ಣಿನ ಮಡಿಲಲ್ಲಿ, ಹಳ್ಳಿಯ ಸೊಗಡಲ್ಲಿ
+      </p>
+
+      <button class="mt-6 px-6 py-3 bg-white text-black rounded-full hover:bg-green-400 transition fade-up">
+        Start Exploring
+      </button>
+
+    </div>
+
+
+  </div>
+
+  <!-- Extra section to enable scroll -->
+  <div class="h-[150vh] bg-gradient-to-b from-black to-green-900"></div>
+
+  <!-- Scroll Effect Script -->
+  <script>
+  </script>
+
+</body>
+</html>
