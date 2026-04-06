@@ -1,0 +1,24 @@
+{
+  "name": "karnataka_rt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adarshm86/Karnataka_rural_tourism.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/adarshm86/Karnataka_rural_tourism/issues"
+  },
+  "homepage": "https://github.com/adarshm86/Karnataka_rural_tourism#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.2.2"
+  }
+}

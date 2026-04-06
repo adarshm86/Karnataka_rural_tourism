@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rural Experience Calendar</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="output.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-b from-black to-green-900 min-h-screen text-white">
+
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center py-4 px-4 ">
+    <h1 class="text-xl font-bold">ಕರ್ನಾಟಕ Rural</h1>
+
+    <a href="index.html" class="border px-4 py-2 rounded-full hover:bg-white hover:text-black transition">
+      ← Back
+    </a>
+  </nav>
+
+  <!-- Title -->
+  <h1 class="text-3xl text-center mt-4">
+    Rural Experience Calendar 📅
+  </h1>
+
+  <!-- Calendar Grid -->
+  <div id="calendar" class="p-8 grid md:grid-cols-3 gap-6"></div>
+
+  <!-- Script -->
+  <script>
+    const calendarData = [
+      {
+    month: "January",
+    event: "Kichchu Hayisuvudu",
+    location: "Mandya & Ramanagara",
+    description: "Cattle fire ritual festival.",
+    best_time: "Mid January"
+  },
+{
+    month: "February",
+    event: "Banashankari Jatre",
+    location: "Badami",
+    description: "Rural fair with wooden toys.",
+    best_time: "Full moon day"
+  },
+  {
+    month: "March",
+    event: "Bedara Vesha",
+    location: "Sirsi",
+    description: "Colorful folk dance festival.",
+    best_time: "Holi time"
+  },
+
+  {
+    month: "April",
+    event: "Mylara Karnika",
+    location: "Mylara, Haveri",
+    description: "Prophecy ritual gathering.",
+    best_time: "Early April"
+  },
+  {
+    month: "May",
+    event: "Kodava Hockey Festival",
+    location: "Coorg",
+    description: "Huge hockey tournament.",
+    best_time: "Entire May"
+  },
+  {
+    month: "June",
+    event: "Kambala",
+    location: "Coastal Karnataka",
+    description: "Buffalo racing festival.",
+    best_time: "June to November"
+  },
+  {
+    month: "September",
+    event: "Karaga Festival",
+    location: "Bangalore Rural",
+    description: "Night procession with floral pyramid.",
+    best_time: "Full moon day"
+  },
+  {
+    month: "October",
+    event: "Dasara Celebrations",
+    location: "Mysuru Villages",
+    description: "Traditional rural celebrations of Dasara.",
+    best_time: "October"
+  },
+    {
+        month: "November",
+        event: "Hampi Utsav",
+        location: "Hampi",
+        description: "Cultural festival with music and dance.",
+        best_time: "November"
+    },
+    {
+        month: "December",
+        event: "Nagarahole Festival",
+        location: "Nagarahole National Park",
+        description: "Wildlife and nature celebration.",
+        best_time: "December"
+    }
+    ];
+
+    const container = document.getElementById("calendar");
+
+    calendarData.forEach(item => {
+      container.innerHTML += `
+        <div class="bg-white/10 backdrop-blur-lg p-5 rounded-xl border border-white/20 hover:scale-105 transition">
+          
+          <h2 class="text-xl font-bold text-green-300">${item.month}</h2>
+          
+          <p class="mt-2 font-semibold">${item.event}</p>
+          
+          <p class="text-sm text-gray-300">${item.location}</p>
+          
+          <p class="mt-2 text-sm">${item.description}</p>
+          
+          <p class="mt-3 text-green-400 text-sm">
+            Best Time: ${item.best_time}
+          </p>
+          
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>
+
+
