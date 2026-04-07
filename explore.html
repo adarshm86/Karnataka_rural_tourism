@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore Rural Karnataka</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 16px;
+}
+</style>
+</head>
+
+<body class="bg-pink-50 p-6">
+
+<h1 class="text-3xl font-bold text-center mb-6 text-pink-600">
+    Explore Rural Karnataka 🌾
+</h1>
+
+<!-- FILTER BUTTONS -->
+<div class="flex justify-center gap-3 mb-4 flex-wrap">
+    <button onclick="filterMarkers('all')" 
+        class="px-4 py-2 bg-black text-white rounded-xl hover:scale-105 transition">
+        All
+    </button>
+
+    <button onclick="filterMarkers('temple')" 
+        class="px-4 py-2 bg-pink-500 text-white rounded-xl hover:scale-105 transition">
+        🛕 Temples
+    </button>
+
+    <button onclick="filterMarkers('festival')" 
+        class="px-4 py-2 bg-green-500 text-white rounded-xl hover:scale-105 transition">
+        🎉 Festivals
+    </button>
+</div>
+
+<!-- MAP -->
+<div id="map" class="shadow-xl"></div>
+
+<script>
+
+// Initialize map
+var map = L.map('map').setView([15.3173, 75.7139], 7);
+
+// Tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+// Icons
+var templeIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+    iconSize: [32, 32]
+});
+
+var festivalIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/3176/3176286.png',
+    iconSize: [32, 32]
+});
+
+// TEMPLE DATA
+var locations = [
+    { name: "Madhukeshwara Temple", coords: [14.5416, 74.8673], description: "Ancient Kadamba-era rural temple" },
+    { name: "Kedareshwara Temple", coords: [14.3940, 75.3110], description: "Hidden Hoysala architectural gem" },
+    { name: "Naganatha Temple", coords: [15.9150, 75.6850], description: "Early Chalukyan temple" },
+    { name: "Chandramouleshwara Temple", coords: [15.3647, 75.1136], description: "Unique 12-door Shiva temple" },
+    { name: "Bandalike Temple Complex", coords: [13.9185, 75.3550], description: "5 temples with epic carvings" },
+    { name: "Tarakeshwara Temple", coords: [14.7642, 75.1240], description: "Massive yet lesser-known temple" },
+    { name: "Galageshwara Temple", coords: [15.2700, 75.9600], description: "Temple beside river" },
+    { name: "Mukteshwara Temple", coords: [14.8000, 75.3000], description: "Fine carvings in rural Karnataka" },
+    { name: "Lakshmi Devi Temple", coords: [12.9920, 76.1730], description: "Oldest Hoysala temple" },
+    { name: "Someshwara Temple", coords: [13.1360, 78.1290], description: "Vijayanagara-style temple" }
+];
+
+// FESTIVAL DATA (HYPER LOCAL)
+var festivalLocations = [
+    { name: "Kichchu Hayisuvudu", coords: [12.6000, 77.0000], village: "Mandya", description: "Fire ritual for cattle protection", best_time: "January" },
+    { name: "Banashankari Jatre", coords: [15.9150, 75.6760], village: "Badami", description: "Village fair with local crafts", best_time: "February" },
+    { name: "Bedara Vesha", coords: [14.6200, 74.8400], village: "Sirsi", description: "Hunter-themed folk dance", best_time: "March" },
+    { name: "Mylara Jatre", coords: [14.8500, 75.6000], village: "Haveri", description: "Devotional rituals & prophecy", best_time: "March-April" },
+    { name: "Kambala", coords: [12.8700, 74.8800], village: "Coastal Karnataka", description: "Buffalo racing in muddy fields", best_time: "Nov-Feb" },
+    { name: "Suggi Kunita", coords: [13.3400, 77.1000], village: "Tumkur", description: "Harvest dance with masks", best_time: "Jan-Feb" },
+    { name: "Somana Kunita", coords: [14.2500, 75.8000], village: "North Karnataka", description: "Night spirit dance ritual", best_time: "Winter" },
+    { name: "Hulivesha", coords: [13.3400, 74.7500], village: "Udupi", description: "Tiger dance during Janmashtami", best_time: "August" },
+    { name: "Karaga Rural", coords: [13.2000, 77.5000], village: "Bangalore Rural", description: "Sacred overnight procession", best_time: "April" },
+    { name: "Village Jatre", coords: [15.2000, 76.3000], village: "Various villages", description: "Temple fairs with food & rituals", best_time: "Varies" }
+];
+
+// STORE ALL MARKERS
+var markers = [];
+
+// ADD TEMPLES
+locations.forEach(loc => {
+    let marker = L.marker(loc.coords, { icon: templeIcon }).addTo(map);
+
+    marker.bindPopup(`
+        <b>${loc.name}</b><br>
+        ${loc.description}
+    `);
+
+    markers.push({ marker: marker, coords: loc.coords, type: "temple" });
+});
+
+// ADD FESTIVALS
+festivalLocations.forEach(loc => {
+    let marker = L.marker(loc.coords, { icon: festivalIcon }).addTo(map);
+
+    marker.bindPopup(`
+        <div style="text-align:center">
+            <b>${loc.name}</b><br>
+            <small>${loc.village}</small><br>
+            ${loc.description}<br>
+            <span style="font-size:11px;color:gray">Best: ${loc.best_time}</span><br>
+            <button 
+                style="margin-top:5px;padding:5px 10px;background:#22c55e;color:white;border:none;border-radius:8px"
+                onclick="focusLocation(${loc.coords[0]}, ${loc.coords[1]})">
+                View Here
+            </button>
+        </div>
+    `);
+
+    markers.push({ marker: marker, coords: loc.coords, type: "festival" });
+});
+
+// FILTER FUNCTION
+function filterMarkers(type) {
+    markers.forEach(obj => {
+        if (type === "all" || obj.type === type) {
+            map.addLayer(obj.marker);
+        } else {
+            map.removeLayer(obj.marker);
+        }
+    });
+}
+
+// FOCUS FUNCTION
+function focusLocation(lat, lng) {
+    map.flyTo([lat, lng], 13, { duration: 1.5 });
+
+    markers.forEach(obj => {
+        if (obj.coords[0] === lat && obj.coords[1] === lng) {
+            obj.marker.openPopup();
+            obj.marker.setZIndexOffset(1000);
+        }
+    });
+}
+
+</script>
+
+</body>
+</html>
